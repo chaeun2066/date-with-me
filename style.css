@@ -204,6 +204,15 @@ body {
   border-color: var(--pink-main);
   box-shadow: 0 0 0 4px rgba(255, 143, 177, 0.18);
 }
+/* 날짜 입력 고정 (JS로 오늘 날짜가 채워지며, 사용자 조작 불가) */
+.input--locked {
+  pointer-events: none;
+  cursor: default;
+  background: #fff4f8;
+  color: var(--text);
+  -webkit-user-select: none;
+  user-select: none;
+}
 .hint {
   min-height: 22px;
   margin-bottom: 16px;
@@ -259,6 +268,13 @@ body {
 }
 .summary__row:last-child { border-bottom: none; }
 .summary__row span { color: var(--text-soft); }
+.summary__row img {
+  max-height: 60px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  align-self: center;
+}
 .summary__row strong { color: var(--text); font-weight: 400; }
 
 /* ---------- 저장 전용 카드 (화면 밖 · JPG 캡처 영역) ---------- */
