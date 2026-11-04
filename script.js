@@ -155,6 +155,33 @@ const timeInput = document.getElementById("timeInput");
 const dateNextBtn = document.getElementById("dateNextBtn");
 const step3Hint = document.getElementById("step3Hint");
 
+/* 오늘 날짜를 YYYY-MM-DD 형식으로 반환 */
+function getTodayString() {
+  const today = new Date();
+  const y = today.getFullYear();
+  const m = String(today.getMonth() + 1).padStart(2, "0");
+  const d = String(today.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+/* 날짜 필드를 오늘 날짜로 고정 (readonly + 이벤트 차단) */
+function lockDateToToday() {
+  dateInput.value = getTodayString();
+}
+
+/* JS로 값을 바꾸려 해도 오늘 날짜로 되돌림 */
+dateInput.addEventListener("change", (e) => {
+  e.stopImmediatePropagation();
+  dateInput.value = getTodayString();
+});
+dateInput.addEventListener("input", (e) => {
+  e.stopImmediatePropagation();
+  dateInput.value = getTodayString();
+});
+
+/* 초기 설정 */
+lockDateToToday();
+
 dateNextBtn.addEventListener("click", () => {
   if (!dateInput.value && !timeInput.value) {
     step3Hint.textContent = "날짜랑 시간을 골라줘야 만날 수 있어 🥺";
@@ -298,7 +325,7 @@ restartBtn.addEventListener("click", () => {
   answers.food = null;
   answers.createdAt = null;
 
-  dateInput.value = "";
+  lockDateToToday(); // 재시작 시에도 오늘 날짜로 고정
   timeInput.value = "";
   step3Hint.textContent = "";
   if (saveHint) saveHint.textContent = "";
