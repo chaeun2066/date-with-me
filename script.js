@@ -244,7 +244,7 @@ function showFinal() {
   // 제목의 n시를 선택한 시간으로 치환 (쉼표 뒤에서 줄바꿈)
   if (_finalTitle) {
     _finalTitle.textContent =
-      `오빠랑 갈 수 있어서 행복해 🌸\n${answers.time}시에 같이 만나자`;
+      `우왕~ 나두 좋아!!\n오빠랑 갈 수 있어서 행복해 🌸\n${answers.time}시에 같이 만나자`;
   }
 
   // 요약 카드 채우기 (화면 표시용)
