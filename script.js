@@ -195,11 +195,11 @@ dateNextBtn.addEventListener("click", () => {
     step3Hint.textContent = "앗, 시간을 안 골랐어! ⏰";
     return;
   }
-  // 통과 → 저장 후 4단계
+  // 통과 → 저장 후 바로 5단계(최종 화면)로
   step3Hint.textContent = "";
   answers.date = dateInput.value;
   answers.time = timeInput.value;
-  goStep(4);
+  showFinal();
 });
 
 /* =========================================================
