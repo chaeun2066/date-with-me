@@ -199,7 +199,9 @@ dateNextBtn.addEventListener("click", () => {
   step3Hint.textContent = "";
   answers.date = dateInput.value;
   answers.time = timeInput.value;
-  showFinal();
+  // showFinal()은 아래에 정의되어 있으나 함수 선언 호이스팅으로 호출 가능.
+  // 단, const 변수(finalTitle 등)는 호이스팅 안 되므로 여기서는 setTimeout으로 안전 실행
+  setTimeout(showFinal, 0);
 });
 
 /* =========================================================
@@ -233,14 +235,22 @@ function showFinal() {
   // 콘솔에서 저장 구조 확인 가능
   console.log("📦 저장된 답변:", answers);
 
+  // DOM 요소를 함수 실행 시점에 직접 가져옴 (안전한 참조)
+  const _finalTitle = document.getElementById("finalTitle");
+  const _sumDate    = document.getElementById("sumDate");
+  const _sumTime    = document.getElementById("sumTime");
+  const _sumFood    = document.getElementById("sumFood");
+
   // 제목의 n시를 선택한 시간으로 치환 (쉼표 뒤에서 줄바꿈)
-  finalTitle.textContent =
-    `싫다고 안해줘서 기뻐,\n${answers.time}시에 내가 데리러 갈게 🚶🏻‍♀️`;
+  if (_finalTitle) {
+    _finalTitle.textContent =
+      `싫다고 안해줘서 기뻐,\n${answers.time}시에 내가 데리러 갈게 🚶🏻‍♀️`;
+  }
 
   // 요약 카드 채우기 (화면 표시용)
-  sumDate.textContent = formatKoreanDate(answers.date);
-  sumTime.textContent = answers.time || "-";
-  sumFood.textContent = answers.food || "-";
+  if (_sumDate) _sumDate.textContent = formatKoreanDate(answers.date);
+  if (_sumTime) _sumTime.textContent = answers.time || "-";
+  if (_sumFood) _sumFood.textContent = answers.food || "-";
 
   // 저장 전용 카드도 같은 값으로 채우기
   const capDate = document.getElementById("capDate");
